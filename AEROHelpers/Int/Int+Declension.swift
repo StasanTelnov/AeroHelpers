@@ -1,5 +1,5 @@
 //
-//  String+Declension.swift
+//  Int+Declension.swift
 //  AEROHelpers
 //
 //  Created by Stas on 23/05/2019.
@@ -8,49 +8,49 @@
 
 import Foundation
 
-/// extension for declension strings for its count
-public extension String {
+/// Declension strings by its count
+public extension Int {
     
-    /// prepared declinsions
+    /// Prepared declinsions
     enum Declensions {
-        static func daysNameFor(_ days: Int) -> String {
-            return declension(days, ["дня", "дней", "дней"])
+        static func days(_ days: Int) -> String {
+            return days.declension(["дня", "дней", "дней"])
         }
         
         static func seconds(_ seconds: Int) -> String {
-            return declension(seconds, ["секунду", "секунды", "секунд"])
+            return seconds.declension(["секунду", "секунды", "секунд"])
         }
         
         static func stones(_ stones: Int) -> String {
-            return declension(stones, ["камень", "камня", "камней"])
+            return stones.declension(["камень", "камня", "камней"])
         }
         
         static func products(_ products: Int) -> String {
-            return declension(products, ["изделие", "изделия", "изделий"])
+            return products.declension(["изделие", "изделия", "изделий"])
         }
         
         static func productsGoods(_ products: Int) -> String {
-            return declension(products, ["товар", "товара", "товаров"])
+            return products.declension(["товар", "товара", "товаров"])
         }
         
         static func items(_ items: Int) -> String {
-            return declension(items, ["элемент", "элемента", "элементов"])
+            return items.declension(["элемент", "элемента", "элементов"])
         }
     }
     
     
-    /// MARK: declense items to specific number of item
-    static func declension(_ number: Int, _ variants: [String]) -> String {
+    /// Declense items to current integer
+    func declension(_ variants: [String]) -> String {
         guard variants.count == 3 else {
             fatalError("Number of variants should equal to 3")
         }
         var str = ""
         
-        if number >= 11,
-            number <= 19 {
+        if self >= 11,
+            self <= 19 {
             str = variants[2]
         } else {
-            let i = number % 10
+            let i = self % 10
             
             switch i {
             case 1: str = variants[0]

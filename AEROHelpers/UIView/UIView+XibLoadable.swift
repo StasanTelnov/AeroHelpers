@@ -6,18 +6,19 @@
 //  Copyright © 2018 AERO. All rights reserved.
 //
 
-//import SnapKit
 import UIKit
 
-/// protocol for views, which needed loading itself from xib file
+/// Protocol for views, which needed loading itself from xib file
 public protocol XibLoadable: UIView {
     func loadXib()
 }
 
-/// extension for loading views from xib on storyboards and manual inits
+/// Loading view from xib.
 public extension XibLoadable {
     
-    /// load view from xib on storyboards and manual init
+    /// Loading view from xib in current bundle. Generate fatal error if xib file dont exists.
+    ///
+    /// Xib file name should equal to class name
     func loadXib() {
         
         let nibName = String(describing: type(of: self))

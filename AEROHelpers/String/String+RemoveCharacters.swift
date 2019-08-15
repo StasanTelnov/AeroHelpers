@@ -8,13 +8,14 @@
 
 import Foundation
 
-/// extension for processing with characters in string
+/// Helper for removing characters from string
 public extension String {
     
-    /// remove string characters from string
+    /// Remove string characters from string
     func removeCharacters(from: String) -> String {
         return removeCharacters(CharacterSet(charactersIn: from))
     }
+    
     
     private func removeCharacters(_ forbiddenChars: CharacterSet) -> String {
         let passed = unicodeScalars.filter { !forbiddenChars.contains($0) }

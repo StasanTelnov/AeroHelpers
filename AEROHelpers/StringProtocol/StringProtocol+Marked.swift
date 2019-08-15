@@ -1,5 +1,5 @@
 //
-//  String+Marked.swift
+//  StringProtocol+Marked.swift
 //  AEROHelpers
 //
 //  Created by Stas Telnov on 22.11.2018.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-/// extension for marked other color some substrings in other strings
+/// Extension for marked substrings with other font/color
 public extension StringProtocol {
     
-    /// return attributed string with marked some substrings
+    /// Return attributed string with marked some substrings
     func markSubsctrings(_ markedSubstrings: [Self],
                          mainFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
                          mainColor: UIColor = .darkText,
@@ -33,7 +33,7 @@ public extension StringProtocol {
     }
     
     
-    // internal helpers
+    // MARK: internal methods
     private func simpleAttributedString(font: UIFont, color: UIColor) -> NSMutableAttributedString {
         guard let self = self as? String else {
             return NSMutableAttributedString(string: "")

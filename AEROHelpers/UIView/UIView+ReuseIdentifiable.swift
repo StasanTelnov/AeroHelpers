@@ -8,16 +8,25 @@
 
 import UIKit
 
-/// protocol for views, which needed have unique name identifier
+/// Protocol for views, which needed have unique name identifier
 public protocol ReuseIdentifiable: UIView {
+    /// Unique identifier for view class
     static var reuseIdentifier: String { get }
+    
+    /// Unique identifier for view object
+    var reuseIdentifier: String { get }
 }
 
-/// extend protocol for generate unique identifier for reusing (cells for example)
+/// Generate unique identifier for reusing
 public extension ReuseIdentifiable {
     
-    /// unique name identifier
+    /// Unique identifier for view controller of class
     static var reuseIdentifier: String {
-        return String(describing: Self.self)
+        return String(describing: self.self)
+    }
+    
+    /// Unique identifier for view controller of object
+    var reuseIdentifier: String {
+        return Self.reuseIdentifier
     }
 }

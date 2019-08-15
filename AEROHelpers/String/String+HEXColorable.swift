@@ -8,17 +8,20 @@
 
 import UIKit
 
-/// sdf
+/// Protocol for string, which should conform HEX string color format
 public protocol ColoredString {
+    
+    /// Check, that this string is HEX color string
     var isHexColor: Bool { get }
+    
+    /// Generate UIColor from string, if it possible
     var color: UIColor? { get }
 }
 
-/// extension for check that string is HEX color and convert it to UIColor
+/// Realization of ColoredString protocol
 extension String: ColoredString {
-//    typealias ColoredString = String
     
-    /// check, that is HEX color string
+    /// Check, that is HEX color string
     public var isHexColor: Bool {
         if (self.hasPrefix("#") && count == 7) || count == 6 {
             return true
@@ -27,7 +30,7 @@ extension String: ColoredString {
         return false
     }
     
-    /// return optional UIColor, if string is HEX color
+    /// Return optional UIColor, if string is HEX color
     public var color: UIColor? {
         guard isHexColor else {
             return nil

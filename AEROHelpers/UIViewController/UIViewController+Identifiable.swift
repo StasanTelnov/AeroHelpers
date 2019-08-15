@@ -13,10 +13,10 @@ import UIKit
 /// Its already relalized, you can dont redeclare reuseIdentifier variable
 public protocol Identifiable: UIViewController {
     
-    /// Unique identifier for view controller of class
+    /// Unique identifier for view controller class
     static var reuseIdentifier: String { get }
     
-    /// Unique identifier for view controller of object
+    /// Unique identifier for view controller object
     var reuseIdentifier: String { get }
 }
 
