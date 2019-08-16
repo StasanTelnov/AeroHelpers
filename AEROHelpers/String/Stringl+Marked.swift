@@ -12,12 +12,12 @@ import UIKit
 public extension String {
     
     /// Return attributed string with marked some substrings
-    func markSubsctrings(_ markedSubstrings: [String],
-                         mainFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
-                         mainColor: UIColor = .darkText,
-                         markFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
-                         markColor: UIColor = .blue,
-                         onlyFirst: Bool = false) -> NSAttributedString? {
+    func markSubstrings(_ markedSubstrings: [String],
+                        mainFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
+                        mainColor: UIColor = .darkText,
+                        markFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
+                        markColor: UIColor = .blue,
+                        onlyFirst: Bool = false) -> NSAttributedString? {
         
         let infoText = simpleAttributedString(font: mainFont, color: mainColor)
         

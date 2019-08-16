@@ -8,63 +8,99 @@
 
 import Foundation
 
+/// Variants of declension
+/// - Parameters:
+///     - oneVariant: variant, when items number is one (1 день, 21 день, 1361 день).
+///     - mediumVariant: variant, when items number between 2 and 4 (2 дня, 24 дня, 1363 дня).
+///     - othersVariants: variant, when items number is: zero, over 4, between 11 and 19 (0 дней, 16 дней, 1369 дней).
+public struct DeclensionsVariants<T> {
+    var oneVariant: T
+    var mediumVariant: T
+    var othersVariants: T
+    
+    public init(_ one: T, _ medium: T, _ others: T) {
+        oneVariant = one
+        mediumVariant = medium
+        othersVariants = others
+    }
+    
+    subscript(index: Int) -> T {
+        switch index {
+        case 1:
+            return oneVariant
+        case 2...4:
+            return mediumVariant
+        case 0,
+             5...9,
+             11...19:
+            return othersVariants
+            
+        default:
+            fatalError("Incorrect range of variants")
+        }
+    }
+}
+
+
 /// Declension strings by its count
 public extension Int {
     
-    /// Prepared declinsions
-    enum Declensions {
-        static func days(_ days: Int) -> String {
-            return days.declension(["дня", "дней", "дней"])
+    /// Predefined declinsions
+    struct Declensions {
+        var currentNumber: Int
+        
+        init(_ number: Int) {
+            currentNumber = number
         }
         
-        static func seconds(_ seconds: Int) -> String {
-            return seconds.declension(["секунду", "секунды", "секунд"])
+        /// Predefined days variants
+        public var days: String {
+            let variants = DeclensionsVariants("день", "дня", "дней")
+            return currentNumber.declension(variants)
         }
         
-        static func stones(_ stones: Int) -> String {
-            return stones.declension(["камень", "камня", "камней"])
+        /// Predefined seconds variants
+        public var seconds: String {
+            let variants = DeclensionsVariants("секунду", "секунды", "секунд")
+            return currentNumber.declension(variants)
         }
         
-        static func products(_ products: Int) -> String {
-            return products.declension(["изделие", "изделия", "изделий"])
+        /// Predefined stones variants
+        public var stones: String {
+            let variants = DeclensionsVariants("камень", "камня", "камней")
+            return currentNumber.declension(variants)
         }
         
-        static func productsGoods(_ products: Int) -> String {
-            return products.declension(["товар", "товара", "товаров"])
+        /// Predefined products variants
+        public var products: String {
+            let variants = DeclensionsVariants("изделие", "изделия", "изделий")
+            return currentNumber.declension(variants)
         }
         
-        static func items(_ items: Int) -> String {
-            return items.declension(["элемент", "элемента", "элементов"])
+        /// Predefined productsGoods variants
+        public var productsGoods: String {
+            let variants = DeclensionsVariants("товар", "товара", "товаров")
+            return currentNumber.declension(variants)
+        }
+        
+        /// Predefined items variants
+        public var items: String {
+            let variants = DeclensionsVariants("элемент", "элемента", "элементов")
+            return currentNumber.declension(variants)
         }
     }
     
+    /// Return predefined variants
+    var defaultsDeclensions: Declensions {
+        return Declensions(self)
+    }
     
     /// Declense items to current integer
-    func declension(_ variants: [String]) -> String {
-        guard variants.count == 3 else {
-            fatalError("Number of variants should equal to 3")
+    func declension(_ variants: DeclensionsVariants<String>) -> String {
+        if 11...19 ~= self   {
+            return variants[self]
         }
-        var str = ""
-        
-        if self >= 11,
-            self <= 19 {
-            str = variants[2]
-        } else {
-            let i = self % 10
-            
-            switch i {
-            case 1: str = variants[0]
-                
-            case 2, 3, 4:
-                str = variants[1]
-                
-            default:
-                str = variants[2]
-                
-            }
-        }
-        
-        return str
+        return variants[self % 10]
     }
     
 }
