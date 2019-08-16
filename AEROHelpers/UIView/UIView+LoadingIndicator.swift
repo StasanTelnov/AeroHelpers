@@ -13,6 +13,9 @@ import UIKit
 public extension UIView {
     
     /// Show loading indicator over view. Is fogging is true, that over view dispay gray fogging
+    /// - Parameters:
+    ///   - fogging: if true, that view has gray layer
+    ///   - indicatorStyle: style of indicator
     func showLoading(fogging: Bool = true, indicatorStyle: UIActivityIndicatorView.Style? = .none) {
         
         if viewWithTag(DefaultsValues.loadingViewTag) as? LoadingView != nil {
@@ -31,7 +34,10 @@ public extension UIView {
     /// Hide loading indicator if exists
     func hideLoading() {
         while let loadingView = viewWithTag(DefaultsValues.loadingViewTag) {
-            loadingView.removeFromSuperview()
+            guard (loadingView as? LoadingView) == nil else {
+                loadingView.removeFromSuperview()
+                return
+            }
         }
     }
 }

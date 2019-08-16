@@ -14,22 +14,22 @@ import UIKit
 public protocol Identifiable: UIViewController {
     
     /// Unique identifier for view controller class
-    static var reuseIdentifier: String { get }
+    static var identifier: String { get }
     
     /// Unique identifier for view controller object
-    var reuseIdentifier: String { get }
+    var identifier: String { get }
 }
 
 /// Realize Identifiable protocol
 public extension Identifiable {
     
     /// Unique identifier for view controller of class
-    static var reuseIdentifier: String {
+    static var identifier: String {
         return String(describing: self.self)
     }
 
     /// Unique identifier for view controller of object
-    var reuseIdentifier: String {
-        return Self.reuseIdentifier
+    var identifier: String {
+        return Self.identifier
     }
 }

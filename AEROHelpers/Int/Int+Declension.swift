@@ -8,43 +8,51 @@
 
 import Foundation
 
-/// Variants of declension
-/// - Parameters:
-///     - oneVariant: variant, when items number is one (1 день, 21 день, 1361 день).
-///     - mediumVariant: variant, when items number between 2 and 4 (2 дня, 24 дня, 1363 дня).
-///     - othersVariants: variant, when items number is: zero, over 4, between 11 and 19 (0 дней, 16 дней, 1369 дней).
-public struct DeclensionsVariants<T> {
-    var oneVariant: T
-    var mediumVariant: T
-    var othersVariants: T
-    
-    public init(_ one: T, _ medium: T, _ others: T) {
-        oneVariant = one
-        mediumVariant = medium
-        othersVariants = others
-    }
-    
-    subscript(index: Int) -> T {
-        switch index {
-        case 1:
-            return oneVariant
-        case 2...4:
-            return mediumVariant
-        case 0,
-             5...9,
-             11...19:
-            return othersVariants
-            
-        default:
-            fatalError("Incorrect range of variants")
-        }
-    }
-}
-
+//TODO: should refactoring, other structs
 
 /// Declension strings by its count
 public extension Int {
     
+    // MARK: - declensions variants struct
+    /// Variants of declension
+    /// - Parameters:
+    ///     - oneVariant: variant, when remainder of division from count of items to 10 is 1 (1 день, 21 день, 1361 день).
+    ///     - mediumVariant: variant, when remainder of division from count of items to 10 between 2 and 4 (2 дня, 24 дня, 1363 дня).
+    ///     - othersVariants: variant, when remainder of division from count of items to 100 is between 5 and 20 or remainder of division to 10 not equal to oneVariant or mediumVariant (10 дней, 111 дней, 14 дней)
+    struct DeclensionsVariants<T> {
+        var oneVariant: T
+        var mediumVariant: T
+        var othersVariants: T
+        
+        public init(_ one: T, _ medium: T, _ others: T) {
+            oneVariant = one
+            mediumVariant = medium
+            othersVariants = others
+        }
+        
+        /// Return declensioned object via remainder of division or number of items
+        subscript(number: Int) -> T {
+            
+            let remainderOfDivision = number % 100
+            if 5...20 ~= remainderOfDivision {
+                return othersVariants
+            }
+            
+            switch number % 10 {
+                
+            case 1: //remainder of division
+                return oneVariant
+                
+            case 2...4:
+                return mediumVariant
+                
+            default:
+                return othersVariants
+            }
+        }
+    }
+    
+    // MARK: - default declinsions collection
     /// Predefined declinsions
     struct Declensions {
         var currentNumber: Int
@@ -95,7 +103,11 @@ public extension Int {
         return Declensions(self)
     }
     
+    
+    // MARK: - declension
     /// Declense items to current integer
+    /// - Parameters:
+    ///   - variants: DeclensionsVariants object, which containt 3 decletions string items
     func declension(_ variants: DeclensionsVariants<String>) -> String {
         if 11...19 ~= self   {
             return variants[self]
