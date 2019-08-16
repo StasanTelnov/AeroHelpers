@@ -1,5 +1,5 @@
 //
-//  StringProtocol+Currency.swift
+//  String+Currency.swift
 //  AEROHelpers
 //
 //  Created by Stas on 23/05/2019.
@@ -88,7 +88,7 @@ extension Float: CurrencyFormatted {
 
 // MARK: - main string helper
 /// Extension for formating numbers in strings as currency
-public extension StringProtocol {
+public extension String {
     
     // MARK: - public methods
     /// Return currency symbol or empty string in specific locale
@@ -100,7 +100,7 @@ public extension StringProtocol {
     func currency(font: UIFont,
                   color: UIColor,
                   locale: Locale = Locale.current,
-                  symbol: String = Self.currencySymbol(),
+                  symbol: String = .currencySymbol(),
                   prefix: String? = .none,
                   postfix: String? = .none,
                   count: Int? = .none,
@@ -135,7 +135,7 @@ public extension StringProtocol {
     private func formattedCurrency(font: UIFont,
                                    color: UIColor,
                                    locale: Locale = Locale.current,
-                                   symbol: String = Self.currencySymbol(),
+                                   symbol: String = .currencySymbol(),
                                    prefix: String? = .none,
                                    postfix: String? = .none,
                                    maxFraction: Int = 0,

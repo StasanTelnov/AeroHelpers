@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		79D1D5E922CCB96400B6B177 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D5E822CCB96400B6B177 /* AppDelegate.swift */; };
 		79D1D5FE22CCB96500B6B177 /* AEROHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D5FD22CCB96500B6B177 /* AEROHelpersTests.swift */; };
-		79D1D60F22CCBA1200B6B177 /* StringProtocol+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60922CCBA1100B6B177 /* StringProtocol+Currency.swift */; };
+		79D1D60F22CCBA1200B6B177 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60922CCBA1100B6B177 /* String+Currency.swift */; };
 		79D1D61022CCBA1200B6B177 /* String+HEXColorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60A22CCBA1100B6B177 /* String+HEXColorable.swift */; };
-		79D1D61122CCBA1200B6B177 /* StringProtocol+Marked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60B22CCBA1200B6B177 /* StringProtocol+Marked.swift */; };
+		79D1D61122CCBA1200B6B177 /* Stringl+Marked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60B22CCBA1200B6B177 /* Stringl+Marked.swift */; };
 		79D1D61222CCBA1200B6B177 /* Int+Declension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60C22CCBA1200B6B177 /* Int+Declension.swift */; };
 		79D1D61322CCBA1200B6B177 /* String+RemoveCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60D22CCBA1200B6B177 /* String+RemoveCharacters.swift */; };
-		79D1D61422CCBA1200B6B177 /* StringProtocol+Html.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60E22CCBA1200B6B177 /* StringProtocol+Html.swift */; };
+		79D1D61422CCBA1200B6B177 /* String+Html.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60E22CCBA1200B6B177 /* String+Html.swift */; };
 		79D1D61822CCD5A000B6B177 /* UIView+ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D61722CCD5A000B6B177 /* UIView+ReuseIdentifiable.swift */; };
 		79D1D61A22CCD5A900B6B177 /* UIView+XibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D61922CCD5A900B6B177 /* UIView+XibLoadable.swift */; };
 		79D1D61D22CCEDB200B6B177 /* UIViewController+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D61C22CCEDB200B6B177 /* UIViewController+Identifiable.swift */; };
@@ -38,12 +38,12 @@
 		79D1D5F922CCB96500B6B177 /* AEROHelpersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AEROHelpersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D1D5FD22CCB96500B6B177 /* AEROHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEROHelpersTests.swift; sourceTree = "<group>"; };
 		79D1D5FF22CCB96500B6B177 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79D1D60922CCBA1100B6B177 /* StringProtocol+Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Currency.swift"; sourceTree = "<group>"; };
+		79D1D60922CCBA1100B6B177 /* String+Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		79D1D60A22CCBA1100B6B177 /* String+HEXColorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+HEXColorable.swift"; sourceTree = "<group>"; };
-		79D1D60B22CCBA1200B6B177 /* StringProtocol+Marked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Marked.swift"; sourceTree = "<group>"; };
+		79D1D60B22CCBA1200B6B177 /* Stringl+Marked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stringl+Marked.swift"; sourceTree = "<group>"; };
 		79D1D60C22CCBA1200B6B177 /* Int+Declension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Declension.swift"; sourceTree = "<group>"; };
 		79D1D60D22CCBA1200B6B177 /* String+RemoveCharacters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+RemoveCharacters.swift"; sourceTree = "<group>"; };
-		79D1D60E22CCBA1200B6B177 /* StringProtocol+Html.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Html.swift"; sourceTree = "<group>"; };
+		79D1D60E22CCBA1200B6B177 /* String+Html.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Html.swift"; sourceTree = "<group>"; };
 		79D1D61722CCD5A000B6B177 /* UIView+ReuseIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ReuseIdentifiable.swift"; sourceTree = "<group>"; };
 		79D1D61922CCD5A900B6B177 /* UIView+XibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibLoadable.swift"; sourceTree = "<group>"; };
 		79D1D61C22CCEDB200B6B177 /* UIViewController+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Identifiable.swift"; sourceTree = "<group>"; };
@@ -76,16 +76,6 @@
 			path = Int;
 			sourceTree = "<group>";
 		};
-		793A91862305A05A0029A619 /* StringProtocol */ = {
-			isa = PBXGroup;
-			children = (
-				79D1D60E22CCBA1200B6B177 /* StringProtocol+Html.swift */,
-				79D1D60B22CCBA1200B6B177 /* StringProtocol+Marked.swift */,
-				79D1D60922CCBA1100B6B177 /* StringProtocol+Currency.swift */,
-			);
-			path = StringProtocol;
-			sourceTree = "<group>";
-		};
 		79D1D5DC22CCB96400B6B177 = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +100,6 @@
 				79D1D61B22CCED9500B6B177 /* UIViewController */,
 				79D1D61622CCD59000B6B177 /* UIView */,
 				793A9185230596590029A619 /* Int */,
-				793A91862305A05A0029A619 /* StringProtocol */,
 				79D1D60822CCB9DE00B6B177 /* String */,
 				79D1D5E822CCB96400B6B177 /* AppDelegate.swift */,
 				79D1D5F422CCB96500B6B177 /* Info.plist */,
@@ -130,6 +119,9 @@
 		79D1D60822CCB9DE00B6B177 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				79D1D60E22CCBA1200B6B177 /* String+Html.swift */,
+				79D1D60B22CCBA1200B6B177 /* Stringl+Marked.swift */,
+				79D1D60922CCBA1100B6B177 /* String+Currency.swift */,
 				79D1D60A22CCBA1100B6B177 /* String+HEXColorable.swift */,
 				79D1D60D22CCBA1200B6B177 /* String+RemoveCharacters.swift */,
 			);
@@ -275,13 +267,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				79D1D61D22CCEDB200B6B177 /* UIViewController+Identifiable.swift in Sources */,
-				79D1D61122CCBA1200B6B177 /* StringProtocol+Marked.swift in Sources */,
+				79D1D61122CCBA1200B6B177 /* Stringl+Marked.swift in Sources */,
 				79F0220B22E059AC009D7ED6 /* UIView+LoadingIndicator.swift in Sources */,
 				79D1D61A22CCD5A900B6B177 /* UIView+XibLoadable.swift in Sources */,
-				79D1D60F22CCBA1200B6B177 /* StringProtocol+Currency.swift in Sources */,
+				79D1D60F22CCBA1200B6B177 /* String+Currency.swift in Sources */,
 				79D1D61222CCBA1200B6B177 /* Int+Declension.swift in Sources */,
 				79D1D5E922CCB96400B6B177 /* AppDelegate.swift in Sources */,
-				79D1D61422CCBA1200B6B177 /* StringProtocol+Html.swift in Sources */,
+				79D1D61422CCBA1200B6B177 /* String+Html.swift in Sources */,
 				79D1D61822CCD5A000B6B177 /* UIView+ReuseIdentifiable.swift in Sources */,
 				79D1D61322CCBA1200B6B177 /* String+RemoveCharacters.swift in Sources */,
 				79D1D61022CCBA1200B6B177 /* String+HEXColorable.swift in Sources */,

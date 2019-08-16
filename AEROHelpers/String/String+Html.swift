@@ -1,5 +1,5 @@
 //
-//  StringProtocol+Html.swift
+//  String+Html.swift
 //  AEROHelpers
 //
 //  Created by Stas on 23/05/2019.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol for String, which can contain html
-public protocol HtmlString: StringProtocol {
+public protocol HtmlString {
     
     /// Generate attributes string from string with html
     var html: NSAttributedString? { get }
@@ -26,7 +26,7 @@ public protocol HtmlString: StringProtocol {
 
 
 /// for processing with strings, which contain html elements or entities
-extension HtmlString {
+extension String: HtmlString {
     
     /// Try convert html string to NSAttributedString with equal to exists tags attributes
     public var html: NSAttributedString? {

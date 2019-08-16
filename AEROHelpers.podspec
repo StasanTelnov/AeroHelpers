@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   	s.cocoapods_version = '>= 1.7.0'  
     
     s.source = { :git => "https://github.com/AeroAgency/AEROHelpers.git", :tag => s.version }
-    s.default_subspec = "UIViewController", "UIView", "Int", "String", "StringProtocol"
+    s.default_subspec = "UIViewController", "UIView", "Int", "String"
 
     
     s.subspec "UIViewController" do |ss|
@@ -31,10 +31,6 @@ Pod::Spec.new do |s|
   	
   	s.subspec "String" do |ss|
     	ss.source_files  = "AEROHelpers/String/"
-  	end
-  	
-  	s.subspec "StringProtocol" do |ss|
-    	ss.source_files  = "AEROHelpers/StringProtocol/"
   	end
   	
 end
