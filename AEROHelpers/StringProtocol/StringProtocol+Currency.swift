@@ -8,9 +8,13 @@
 
 import UIKit
 
+//swiftlint:disable function_parameter_count
+
 // MARK: - protocol
 /// Protocol for string and numbers, which shold support formating as currency
 public protocol CurrencyFormatted {
+    
+    /// Should return formatted attributted string
     func currency(font: UIFont,
                   color: UIColor,
                   locale: Locale,
@@ -27,6 +31,7 @@ public protocol CurrencyFormatted {
 
 // MARK: - numbers helpers
 extension Int: CurrencyFormatted {
+    
     public func currency(font: UIFont,
                          color: UIColor,
                          locale: Locale = Locale.current,
@@ -38,7 +43,7 @@ extension Int: CurrencyFormatted {
                          countColor: UIColor? = .none,
                          maxFraction: Int = 0,
                          isStriked: Bool = false) -> NSAttributedString? {
-        
+
         return String(self).currency(font: font,
                                      color: color,
                                      locale: locale,
@@ -65,7 +70,7 @@ extension Float: CurrencyFormatted {
                          countColor: UIColor? = .none,
                          maxFraction: Int = 0,
                          isStriked: Bool = false) -> NSAttributedString? {
-        
+
         return String(self).currency(font: font,
                                      color: color,
                                      locale: locale,
@@ -95,14 +100,14 @@ public extension StringProtocol {
     func currency(font: UIFont,
                   color: UIColor,
                   locale: Locale = Locale.current,
-                  symbol: String = .currencySymbol(),
+                  symbol: String = Self.currencySymbol(),
                   prefix: String? = .none,
                   postfix: String? = .none,
                   count: Int? = .none,
                   countFont: UIFont? = .none,
                   countColor: UIColor? = .none,
                   maxFraction: Int = 0,
-                  isStriked: Bool = false) -> NSAttributedString? {
+                  isStriked: Bool = false) -> (NSAttributedString?) {
 
         guard let string = formattedCurrency(font: font,
                                              color: color,
@@ -130,7 +135,7 @@ public extension StringProtocol {
     private func formattedCurrency(font: UIFont,
                                    color: UIColor,
                                    locale: Locale = Locale.current,
-                                   symbol: String = .currencySymbol(),
+                                   symbol: String = Self.currencySymbol(),
                                    prefix: String? = .none,
                                    postfix: String? = .none,
                                    maxFraction: Int = 0,
@@ -192,3 +197,5 @@ public extension StringProtocol {
         return attributedCountFactorString
     }
 }
+
+//swiftlint:enable function_parameter_count
