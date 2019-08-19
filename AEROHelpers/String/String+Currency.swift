@@ -28,10 +28,17 @@ public protocol CurrencyFormatted {
                   isStriked: Bool) -> NSAttributedString?
 }
 
+extension CurrencyFormatted {
+    /// Return currency symbol or empty string in specific locale
+    public static func currencySymbol(for localeIdentifier: String = "ru_RU") -> String {
+        return Locale(identifier: localeIdentifier).currencySymbol ?? ""
+    }
+}
 
 // MARK: - numbers helpers
+//TODO: bad solution. Should refactor on generics maybe
 extension Int: CurrencyFormatted {
-    
+
     public func currency(font: UIFont,
                          color: UIColor,
                          locale: Locale = Locale.current,
@@ -85,29 +92,54 @@ extension Float: CurrencyFormatted {
     }
 }
 
+extension Double: CurrencyFormatted {
+    public func currency(font: UIFont,
+                         color: UIColor,
+                         locale: Locale = Locale.current,
+                         symbol: String = .currencySymbol(),
+                         prefix: String? = .none,
+                         postfix: String? = .none,
+                         count: Int? = .none,
+                         countFont: UIFont? = .none,
+                         countColor: UIColor? = .none,
+                         maxFraction: Int = 0,
+                         isStriked: Bool = false) -> NSAttributedString? {
+        
+        return String(self).currency(font: font,
+                                     color: color,
+                                     locale: locale,
+                                     symbol: symbol,
+                                     prefix: prefix,
+                                     postfix: postfix,
+                                     count: count,
+                                     countFont: countFont,
+                                     countColor: countColor,
+                                     maxFraction: maxFraction,
+                                     isStriked: isStriked)
+    }
+}
+
+
 
 // MARK: - main string helper
 /// Extension for formating numbers in strings as currency
-public extension String {
+extension String: CurrencyFormatted {
     
     // MARK: - public methods
-    /// Return currency symbol or empty string in specific locale
-    static func currencySymbol(for localeIdentifier: String = "ru_RU") -> String {
-        return Locale(identifier: localeIdentifier).currencySymbol ?? ""
-    }
+
 
     /// Return formatted as cost attributed string from string
-    func currency(font: UIFont,
-                  color: UIColor,
-                  locale: Locale = Locale.current,
-                  symbol: String = .currencySymbol(),
-                  prefix: String? = .none,
-                  postfix: String? = .none,
-                  count: Int? = .none,
-                  countFont: UIFont? = .none,
-                  countColor: UIColor? = .none,
-                  maxFraction: Int = 0,
-                  isStriked: Bool = false) -> (NSAttributedString?) {
+    public func currency(font: UIFont,
+                         color: UIColor,
+                         locale: Locale = Locale.current,
+                         symbol: String = .currencySymbol(),
+                         prefix: String? = .none,
+                         postfix: String? = .none,
+                         count: Int? = .none,
+                         countFont: UIFont? = .none,
+                         countColor: UIColor? = .none,
+                         maxFraction: Int = 0,
+                         isStriked: Bool = false) -> (NSAttributedString?) {
 
         guard let string = formattedCurrency(font: font,
                                              color: color,
