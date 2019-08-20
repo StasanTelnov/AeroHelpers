@@ -260,7 +260,7 @@ Coming soon...
 
 Расширение структуры `String`, включающее в себя следующие методы:
 - **html** - пытается сконвертировать строку, содержащую HTML в соответствующую ей NSAttributedString. В случае неудачи возвращает nil.
-- **decoded** - пытается убрать или декодировать все HTML сущности, и перевести html-строку в обычную. В случае неудачи возвращает nil.
+- **htmlDecoded** - пытается убрать или декодировать все HTML сущности, и перевести html-строку в обычную. В случае неудачи возвращает nil.
 - **nl2br** - убирает из строки все `\r` символы и заменяет все `\n` символы на тег `<br/>`.
 - **br2nl** - заменяет в строке все `<br/>` теги на символ `\n`.
 
@@ -304,10 +304,10 @@ te  st
 ```
 ![](ExamplesImages/String/html/1.png)
 
-**decoded**
+**htmlDecoded**
 ```swift
 let htmlString = "<font style=\"font-family: Helvetica; font-size: 24pt; \">Start <br>te&nbsp;&nbsp;st<br><br> <b>bold</b> </font>"
-print("\(htmlString.decoded!)")
+print("\(htmlString.htmlDecoded!)")
 ```
 Результат:
 ```

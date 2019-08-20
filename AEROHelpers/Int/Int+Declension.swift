@@ -15,15 +15,16 @@ public extension Int {
     
     // MARK: - declensions variants struct
     /// Variants of declension
-    /// - Parameters:
-    ///     - oneVariant: variant, when remainder of division from count of items to 10 is 1 (1 день, 21 день, 1361 день).
-    ///     - mediumVariant: variant, when remainder of division from count of items to 10 between 2 and 4 (2 дня, 24 дня, 1363 дня).
-    ///     - othersVariants: variant, when remainder of division from count of items to 100 is between 5 and 20 or remainder of division to 10 not equal to oneVariant or mediumVariant (10 дней, 111 дней, 14 дней)
     struct DeclensionsVariants<T> {
         var oneVariant: T
         var mediumVariant: T
         var othersVariants: T
         
+        /// Init new variants list
+        /// - Parameters:
+        ///   - oneVariant: Variant, when remainder of division from count of items to 10 is 1 (1 день, 21 день, 1361 день).
+        ///   - mediumVariant: Variant, when remainder of division from count of items to 10 between 2 and 4 (2 дня, 24 дня, 1363 дня).
+        ///   - othersVariants: Variant, when remainder of division from count of items to 100 is between 5 and 20 or remainder of division to 10 not equal to oneVariant or mediumVariant (10 дней, 111 дней, 14 дней)
         public init(_ one: T, _ medium: T, _ others: T) {
             oneVariant = one
             mediumVariant = medium
@@ -109,7 +110,7 @@ public extension Int {
     /// - Parameters:
     ///   - variants: DeclensionsVariants object, which containt 3 decletions string items
     func declension(_ variants: DeclensionsVariants<String>) -> String {
-        if 11...19 ~= self   {
+        if 11...19 ~= self {
             return variants[self]
         }
         return variants[self % 10]

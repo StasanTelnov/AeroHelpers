@@ -15,7 +15,7 @@ public protocol HtmlString {
     var html: NSAttributedString? { get }
     
     /// Remove html from string, convert html string to simple string without tags
-    var decoded: String? { get }
+    var htmlDecoded: String? { get }
     
     /// Covert \n symbols to <br/> tags and remove \r symbols
     var nl2br: String { get }
@@ -47,7 +47,7 @@ extension String: HtmlString {
     }
     
     /// Remove html from string, convert html string to simple string without tags
-    public var decoded: String? {
+    public var htmlDecoded: String? {
         return html?.string
     }
     
