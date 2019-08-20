@@ -62,7 +62,7 @@ private enum Directions: String {
 
 
 // MARK: - indicator container
-private class LoadingView: UIView {
+private class LoadingView: UIView, ReuseIdentifiable {
     
     init() {
         super.init(frame: .zero)
@@ -78,6 +78,7 @@ private class LoadingView: UIView {
         
         addIndicator(style: style)
         
+        bounds = view.bounds
         view.addSubview(self)
     }
     
