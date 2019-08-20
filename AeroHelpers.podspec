@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
     s.swift_versions = ['5.0']
   	s.cocoapods_version = '>= 1.7.0'  
     
-    s.source = { :git => "https://github.com/AeroAgency/AEROHelpers.git", :tag => s.version }
+    s.source = { :git => "https://github.com/AeroAgency/AeroHelpers.git", :tag => s.version }
     s.default_subspec = "UIViewController", "UIView", "Int", "String"
 
     
