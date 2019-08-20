@@ -10,9 +10,13 @@
 import XCTest
 
 // MARK: - configs
-private let kValidVcIdendtifier = "MockedViewController"
-private let kInvalidVcIdendtifier = "UIViewController"
-private let kInvalidVcIdendtifier2 = "OtherViewController"
+private enum UIViewControllerConfig {
+    static let validVcIdendtifier = "MockedViewController"
+    static let invalidVcIdendtifier = "UIViewController"
+    static let invalidVcIdendtifier2 = "MockedViewController2"
+}
+
+
 class MockedViewController: UIViewController, Identifiable { }
 
 private let kDefaultRect = CGRect(x: 0, y: 0, width: 100, height: 100)
@@ -40,17 +44,16 @@ class AEROHelpersTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    // MARK: - view controller
-
+    // MARK: - view controller tests
     func testUniqueVcId() {
-        XCTAssertTrue(identifiableVc.reuseIdentifier == kValidVcIdendtifier)
-        XCTAssertTrue(MockedViewController.reuseIdentifier == kValidVcIdendtifier)
+        XCTAssertTrue(identifiableVc.identifier == UIViewControllerConfig.validVcIdendtifier)
+        XCTAssertTrue(MockedViewController.identifier == UIViewControllerConfig.validVcIdendtifier)
         
-        XCTAssertFalse(identifiableVc.reuseIdentifier == kInvalidVcIdendtifier)
-        XCTAssertFalse(MockedViewController.reuseIdentifier == kInvalidVcIdendtifier)
+        XCTAssertFalse(identifiableVc.identifier == UIViewControllerConfig.invalidVcIdendtifier)
+        XCTAssertFalse(MockedViewController.identifier == UIViewControllerConfig.invalidVcIdendtifier)
         
-        XCTAssertFalse(identifiableVc.reuseIdentifier == kInvalidVcIdendtifier2)
-        XCTAssertFalse(MockedViewController.reuseIdentifier == kInvalidVcIdendtifier2)
+        XCTAssertFalse(identifiableVc.identifier == UIViewControllerConfig.invalidVcIdendtifier2)
+        XCTAssertFalse(MockedViewController.identifier == UIViewControllerConfig.invalidVcIdendtifier2)
     }
     
     
