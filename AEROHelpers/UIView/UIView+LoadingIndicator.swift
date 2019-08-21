@@ -12,13 +12,22 @@ import UIKit
 /// Extension for views, which add and hide activity indicator, blocked user iteraction
 public extension UIView {
     
+    /// Check, is loadingable view at now moment or nor
+    var isLoadingProgress: Bool {
+        guard viewWithTag(DefaultsValues.loadingViewTag) as? LoadingView == nil else {
+            return true
+        }
+        
+        return false
+    }
+    
     /// Show loading indicator over view. Is fogging is true, that over view dispay gray fogging
     /// - Parameters:
     ///   - fogging: if true, that view has gray layer
     ///   - indicatorStyle: style of indicator
     func showLoading(fogging: Bool = true, indicatorStyle: UIActivityIndicatorView.Style? = .none) {
         
-        if viewWithTag(DefaultsValues.loadingViewTag) as? LoadingView != nil {
+        guard !isLoadingProgress else {
             return
         }
         
@@ -33,11 +42,8 @@ public extension UIView {
     
     /// Hide loading indicator if exists
     func hideLoading() {
-        while let loadingView = viewWithTag(DefaultsValues.loadingViewTag) {
-            guard (loadingView as? LoadingView) == nil else {
-                loadingView.removeFromSuperview()
-                return
-            }
+        while let loadingView = viewWithTag(DefaultsValues.loadingViewTag) as? LoadingView {
+            loadingView.removeFromSuperview()
         }
     }
 }

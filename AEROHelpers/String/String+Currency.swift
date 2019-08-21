@@ -38,7 +38,7 @@ extension CurrencyFormatted {
 // MARK: - numbers helpers
 //TODO: bad solution. Should refactor on generics maybe
 extension Int: CurrencyFormatted {
-
+    
     public func currency(font: UIFont,
                          color: UIColor,
                          locale: Locale = Locale.current,
@@ -50,7 +50,7 @@ extension Int: CurrencyFormatted {
                          countColor: UIColor? = .none,
                          maxFraction: Int = 0,
                          isStriked: Bool = false) -> NSAttributedString? {
-
+        
         return String(self).currency(font: font,
                                      color: color,
                                      locale: locale,
@@ -77,7 +77,7 @@ extension Float: CurrencyFormatted {
                          countColor: UIColor? = .none,
                          maxFraction: Int = 0,
                          isStriked: Bool = false) -> NSAttributedString? {
-
+        
         return String(self).currency(font: font,
                                      color: color,
                                      locale: locale,
@@ -126,8 +126,8 @@ extension Double: CurrencyFormatted {
 extension String: CurrencyFormatted {
     
     // MARK: - public methods
-
-
+    
+    
     /// Return formatted as cost attributed string from string
     public func currency(font: UIFont,
                          color: UIColor,
@@ -140,7 +140,7 @@ extension String: CurrencyFormatted {
                          countColor: UIColor? = .none,
                          maxFraction: Int = 0,
                          isStriked: Bool = false) -> (NSAttributedString?) {
-
+        
         guard let string = formattedCurrency(font: font,
                                              color: color,
                                              locale: locale,
@@ -149,17 +149,17 @@ extension String: CurrencyFormatted {
                                              postfix: postfix,
                                              maxFraction: maxFraction,
                                              isStriked: isStriked) else {
-            return .none
+                                                return .none
         }
-
+        
         guard let count = count,
             count > 1 else {
                 return string.copy() as? NSAttributedString
         }
-
+        
         let countFactorPrefix = countFactor(count, font: countFont ?? font, color: countColor ?? color)
         string.insert(countFactorPrefix, at: 0)
-
+        
         return string.copy() as? NSAttributedString
     }
     
@@ -173,10 +173,17 @@ extension String: CurrencyFormatted {
                                    maxFraction: Int = 0,
                                    isStriked: Bool = false) -> NSMutableAttributedString? {
         
-        let digitsString = replacingOccurrences(of: "[^0-9-]", with: "", options: .regularExpression)
+        var digitsString = replacingOccurrences(of: ",", with: ".", options: .literal)
         
-        guard let intConst = Int(digitsString) else {
-                return .none
+        guard digitsString.firstIndex(of: ".") == digitsString.lastIndex(of: ".") else {
+            print("Dont can parse string to number: many dots.")
+            return .none
+        }
+        
+        digitsString = replacingOccurrences(of: "[^.0-9-]", with: "", options: .regularExpression)
+        
+        guard let intConst = Float(digitsString) else {
+            return .none
         }
         
         let price = NSNumber(value: intConst)

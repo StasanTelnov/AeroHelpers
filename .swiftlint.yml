@@ -123,4 +123,5 @@ excluded:
   - Pods
   - Products
   - Style
+  - AEROHelpersTests
   
