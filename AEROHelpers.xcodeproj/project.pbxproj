@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		798F0883230D4916006769CA /* AEROHelpersTestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F0882230D4916006769CA /* AEROHelpersTestsVC.swift */; };
+		798F0885230D4B24006769CA /* AEROHelpersTestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F0884230D4B24006769CA /* AEROHelpersTestsView.swift */; };
+		798F0887230D4B31006769CA /* AEROHelpersTestsInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F0886230D4B31006769CA /* AEROHelpersTestsInt.swift */; };
+		798F0889230D4B3F006769CA /* AEROHelpersTestsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F0888230D4B3F006769CA /* AEROHelpersTestsString.swift */; };
 		79D1D5E922CCB96400B6B177 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D5E822CCB96400B6B177 /* AppDelegate.swift */; };
-		79D1D5FE22CCB96500B6B177 /* AEROHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D5FD22CCB96500B6B177 /* AEROHelpersTests.swift */; };
 		79D1D60F22CCBA1200B6B177 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60922CCBA1100B6B177 /* String+Currency.swift */; };
 		79D1D61022CCBA1200B6B177 /* String+HEXColorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60A22CCBA1100B6B177 /* String+HEXColorable.swift */; };
 		79D1D61122CCBA1200B6B177 /* Stringl+Marked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1D60B22CCBA1200B6B177 /* Stringl+Marked.swift */; };
@@ -32,11 +35,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		798F0882230D4916006769CA /* AEROHelpersTestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEROHelpersTestsVC.swift; sourceTree = "<group>"; };
+		798F0884230D4B24006769CA /* AEROHelpersTestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEROHelpersTestsView.swift; sourceTree = "<group>"; };
+		798F0886230D4B31006769CA /* AEROHelpersTestsInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEROHelpersTestsInt.swift; sourceTree = "<group>"; };
+		798F0888230D4B3F006769CA /* AEROHelpersTestsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEROHelpersTestsString.swift; sourceTree = "<group>"; };
 		79D1D5E522CCB96400B6B177 /* AEROHelpers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AEROHelpers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D1D5E822CCB96400B6B177 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79D1D5F422CCB96500B6B177 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79D1D5F922CCB96500B6B177 /* AEROHelpersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AEROHelpersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		79D1D5FD22CCB96500B6B177 /* AEROHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEROHelpersTests.swift; sourceTree = "<group>"; };
 		79D1D5FF22CCB96500B6B177 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79D1D60922CCBA1100B6B177 /* String+Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		79D1D60A22CCBA1100B6B177 /* String+HEXColorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+HEXColorable.swift"; sourceTree = "<group>"; };
@@ -110,7 +116,10 @@
 		79D1D5FC22CCB96500B6B177 /* AEROHelpersTests */ = {
 			isa = PBXGroup;
 			children = (
-				79D1D5FD22CCB96500B6B177 /* AEROHelpersTests.swift */,
+				798F0882230D4916006769CA /* AEROHelpersTestsVC.swift */,
+				798F0884230D4B24006769CA /* AEROHelpersTestsView.swift */,
+				798F0886230D4B31006769CA /* AEROHelpersTestsInt.swift */,
+				798F0888230D4B3F006769CA /* AEROHelpersTestsString.swift */,
 				79D1D5FF22CCB96500B6B177 /* Info.plist */,
 			);
 			path = AEROHelpersTests;
@@ -284,7 +293,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79D1D5FE22CCB96500B6B177 /* AEROHelpersTests.swift in Sources */,
+				798F0887230D4B31006769CA /* AEROHelpersTestsInt.swift in Sources */,
+				798F0885230D4B24006769CA /* AEROHelpersTestsView.swift in Sources */,
+				798F0889230D4B3F006769CA /* AEROHelpersTestsString.swift in Sources */,
+				798F0883230D4916006769CA /* AEROHelpersTestsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

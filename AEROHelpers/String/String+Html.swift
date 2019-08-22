@@ -15,7 +15,7 @@ public protocol HtmlString {
     var html: NSAttributedString? { get }
     
     /// Remove html from string, convert html string to simple string without tags
-    var decoded: String? { get }
+    var htmlDecoded: String? { get }
     
     /// Covert \n symbols to <br/> tags and remove \r symbols
     var nl2br: String { get }
@@ -46,21 +46,21 @@ extension String: HtmlString {
         }
     }
     
+    
+    //TODO: should optimize, very long executing (see testPerformanceDecode() in AEROHelpersTests)
     /// Remove html from string, convert html string to simple string without tags
-    public var decoded: String? {
+    public var htmlDecoded: String? {
         return html?.string
     }
     
     /// Covert \n symbols to <br/> tags and remove \r symbols
     public var nl2br: String {
-        let cleaneString = replacingOccurrences(of: "\r", with: "")
-        return cleaneString.replacingOccurrences(of: "\n", with: "<br/>")
+        let cleanedString = replacingOccurrences(of: "\r", with: "")
+        return cleanedString.replacingOccurrences(of: "\n", with: "<br/>")
     }
     
     ///Covert <br/> tags to \n symbols
     public var br2nl: String {
-        var replacedString = replacingOccurrences(of: "<br>", with: "\n")
-        replacedString = replacedString.replacingOccurrences(of: "(<br */?>)", with: "\n")
-        return replacedString.replacingOccurrences(of: "(<br*/?>)", with: "\n")
+        return replacingOccurrences(of: "(<br */{0,1} *?>)", with: "\n", options: .regularExpression)
     }
 }

@@ -23,11 +23,18 @@ extension String: ColoredString {
     
     /// Check, that is HEX color string
     public var isHexColor: Bool {
-        if (self.hasPrefix("#") && count == 7) || count == 6 {
-            return true
+        var testIsColor = self
+        
+        if testIsColor.hasPrefix("#") {
+            testIsColor.remove(at: testIsColor.startIndex)
         }
         
-        return false
+        guard Int(testIsColor, radix: 16) != nil,
+            (testIsColor.count == 6 || testIsColor.count == 3) else {
+            return false
+        }
+        
+        return true
     }
     
     /// Return optional UIColor, if string is HEX color
@@ -35,14 +42,24 @@ extension String: ColoredString {
         guard isHexColor else {
             return nil
         }
-        var hexSting = self
+        var hexString = self
         
-        if hexSting.hasPrefix("#") {
-            hexSting.remove(at: hexSting.startIndex)
+        if hexString.hasPrefix("#") {
+            hexString.remove(at: hexString.startIndex)
+        }
+        
+        if hexString.count == 3 {
+            let tmpString = hexString
+            tmpString.forEach({
+                guard let index = hexString.firstIndex(of: $0) else {
+                    return
+                }
+                hexString.insert($0, at: index)
+            })
         }
 
         var rgbValue: UInt32 = 0
-        Scanner(string: hexSting).scanHexInt32(&rgbValue)
+        Scanner(string: hexString).scanHexInt32(&rgbValue)
         
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255,
