@@ -162,16 +162,16 @@ class AEROHelpersTestsString: XCTestCase {
         let defaultFont = UIFont.systemFont(ofSize: 18)
         let defaultColor = UIColor.black
         
-        XCTAssertNotNil(CostsValues.intCost.currency(font: defaultFont, color: defaultColor))
-        XCTAssertNotNil(CostsValues.floatCost.currency(font: defaultFont, color: defaultColor, maxFraction: 2))
-        XCTAssertNotNil(CostsValues.doubleCost.currency(font: defaultFont, color: defaultColor, locale: Locale(identifier: "de_DE"), maxFraction: 2))
-        XCTAssertNotNil(CostsValues.stringCost.currency(font: defaultFont, color: defaultColor, locale: Locale(identifier: "de_DE"), prefix: "prefix - ", postfix: " - postfix", maxFraction: 2))
-        XCTAssertNotNil(CostsValues.stringCostWithSpaceAndMinus.currency(font: defaultFont, color: defaultColor, locale: Locale(identifier: "de_DE"), prefix: "prefix - ", postfix: " - postfix", maxFraction: 2))
-        XCTAssertNotNil(CostsValues.stringCostWithDot.currency(font: defaultFont, color: defaultColor, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", maxFraction: 2))
-        XCTAssertNotNil(CostsValues.stringCostWithComma.currency(font: defaultFont, color: defaultColor, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", maxFraction: 2, isStriked: true))
-        XCTAssertNotNil(CostsValues.stringCostWithText.currency(font: defaultFont, color: defaultColor, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", count: 5, countFont: .boldSystemFont(ofSize: 20), countColor: .red, maxFraction: 2, isStriked: true))
+        XCTAssertNotNil(CostsValues.intCost.currency(mainFont: defaultFont, mainColor: defaultColor))
+        XCTAssertNotNil(CostsValues.floatCost.currency(mainFont: defaultFont, mainColor: defaultColor, maxFraction: 2))
+        XCTAssertNotNil(CostsValues.doubleCost.currency(mainFont: defaultFont, mainColor: defaultColor, locale: Locale(identifier: "de_DE"), maxFraction: 2))
+        XCTAssertNotNil(CostsValues.stringCost.currency(mainFont: defaultFont, mainColor: defaultColor, locale: Locale(identifier: "de_DE"), prefix: "prefix - ", postfix: " - postfix", maxFraction: 2))
+        XCTAssertNotNil(CostsValues.stringCostWithSpaceAndMinus.currency(mainFont: defaultFont, mainColor: defaultColor, locale: Locale(identifier: "de_DE"), prefix: "prefix - ", postfix: " - postfix", maxFraction: 2))
+        XCTAssertNotNil(CostsValues.stringCostWithDot.currency(mainFont: defaultFont, mainColor: defaultColor, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", maxFraction: 2))
+        XCTAssertNotNil(CostsValues.stringCostWithComma.currency(mainFont: defaultFont, mainColor: defaultColor, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", maxFraction: 2, isStriked: true))
+        XCTAssertNotNil(CostsValues.stringCostWithText.currency(mainFont: defaultFont, mainColor: defaultColor, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", count: 5, countFont: .boldSystemFont(ofSize: 20), countColor: .red, maxFraction: 2, isStriked: true))
         
-        XCTAssertNil(CostsValues.stringCostBad.currency(font: defaultFont, color: defaultColor))
+        XCTAssertNil(CostsValues.stringCostBad.currency(mainFont: defaultFont, mainColor: defaultColor))
     }
     
     
@@ -235,7 +235,7 @@ class AEROHelpersTestsString: XCTestCase {
     
     func testPerformanceСurrency() {
         self.measure {
-            CostsValues.stringCostWithText.currency(font: .systemFont(ofSize: 18), color: .black, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", count: 5, countFont: .boldSystemFont(ofSize: 20), countColor: .red, maxFraction: 2, isStriked: true)
+            CostsValues.stringCostWithText.currency(mainFont: .systemFont(ofSize: 18), mainColor: .black, locale: Locale(identifier: "de_DE"), symbol: "¥", prefix: "prefix - ", postfix: " - postfix", count: 5, countFont: .boldSystemFont(ofSize: 20), countColor: .red, maxFraction: 2, isStriked: true)
         }
     }
 
