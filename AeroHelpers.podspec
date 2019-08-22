@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '10.0'
     s.name = 'AeroHelpers'
     s.summary = 'Набор расширений и мини-утилит, часто используемых в проектах Aero.'
-    s.version = '1.0.0'
+    s.version = '1.0.1'
   	s.license = { :type => 'MIT', :file => 'LICENSE' }
     s.authors = { 'Stas Telnov' => 'telnov@aeroidea.ru' }
     s.homepage = 'https://github.com/AeroAgency/AeroHelpers'

@@ -8,6 +8,23 @@
 
 import UIKit
 
+/// Appearance for marked substrings
+public class MarkedSubstrings: UILabel {
+    
+    /// Default font of main text in marked substrings strings
+    @objc public dynamic var mainFont: UIFont?
+    
+    /// Default color of main text in marked substrings strings
+    @objc public dynamic var mainColor: UIColor?
+    
+    /// Default font of marked text in marked substrings strings
+    @objc public dynamic var markFont: UIFont?
+    
+    /// Default color of marked text in marked substrings strings
+    @objc public dynamic var markColor: UIColor?
+    
+}
+
 /// Extension for marked substrings with other font/color
 public extension String {
     
@@ -16,14 +33,14 @@ public extension String {
     ///   - markedSubstrings: List of substrings, which you need marking
     ///   - mainFont: Text font. Optional, by default system font with system font size
     ///   - mainColor: Not-marked text color. Optional, by default is dart text color.
-    ///   - markFont: Text font. Optional, by default equal to mainFont
+    ///   - markFont: Text font. Optional, by default equal to mainFont.
     ///   - markColor: Marked substrings color. Optinal, by default is blue color
     ///   - isOnlyFirst: If true, that all founded substrings will marked, if false, that only first founded. Optional, by default is false
     func markSubstrings(_ markedSubstrings: [String],
-                        mainFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
-                        mainColor: UIColor = .darkText,
-                        markFont: UIFont = .systemFont(ofSize: UIFont.systemFontSize),
-                        markColor: UIColor = .blue,
+                        mainFont: UIFont = MarkedSubstrings.appearance().mainFont ?? .systemFont(ofSize: UIFont.systemFontSize),
+                        mainColor: UIColor = MarkedSubstrings.appearance().mainColor ?? .darkText,
+                        markFont: UIFont? = MarkedSubstrings.appearance().markFont,
+                        markColor: UIColor = MarkedSubstrings.appearance().markColor ?? .blue,
                         isOnlyFirst: Bool = false) -> NSAttributedString? {
         
         let infoText = simpleAttributedString(font: mainFont, color: mainColor)
@@ -32,7 +49,10 @@ public extension String {
         markedSubstrings.forEach {
             ranges(of: $0, isOnlyFirst: isOnlyFirst).forEach { infoRange in
                 let nsInfoRange = NSRange(infoRange, in: self)
-                infoText.addAttributes([.font: markFont, .foregroundColor: markColor], range: nsInfoRange)
+                infoText.addAttributes([.foregroundColor: markColor], range: nsInfoRange)
+                if let markFont = markFont {
+                    infoText.addAttributes([.font: markFont], range: nsInfoRange)
+                }
             }
         }
         return infoText.copy() as? NSAttributedString

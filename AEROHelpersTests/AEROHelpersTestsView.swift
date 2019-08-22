@@ -61,41 +61,12 @@ class AEROHelpersTestsView: XCTestCase {
     
     // MARK: - loading indicator tests
     // MARK: internal
-    @discardableResult
-    private func showLoadingTesting<T: UIView>(_ view: T) -> Bool {
+    private func showLoadingTesting<T: UIView>(_ view: T) {
         view.showLoading()
         
-        var fogViewFound = false
-        var fogBoundsCorrect = false
-        var fogTagNotZero = false
-        var indicatorViewFound = false
-        view.subviews.forEach({
-            if let fogView = $0 as? ReuseIdentifiable,
-                fogView.reuseIdentifier == "LoadingView" {
-                fogViewFound = true
-                
-                if fogView.bounds == view.bounds {
-                    fogBoundsCorrect = true
-                }
-                
-                if fogView.tag != 0 {
-                    fogTagNotZero = true
-                }
-                
-                $0.subviews.forEach({
-                    if ($0 as? UIActivityIndicatorView) != nil {
-                        indicatorViewFound = true
-                    }
-                })
-            }
-        })
-        
-        XCTAssertTrue(fogViewFound)
-        XCTAssertTrue(fogBoundsCorrect)
-        XCTAssertTrue(fogTagNotZero)
-        XCTAssertTrue(indicatorViewFound)
-        
-        return fogViewFound
+        let indicatorView = view.subviews.first(where: { ($0 as? ReuseIdentifiable)?.reuseIdentifier == "LoadingView" })
+        XCTAssertNotNil(indicatorView)
+        XCTAssertTrue(indicatorView?.bounds == view.bounds)
     }
     
     private func isLoadingShowed<T: UIView>(_ view: T) {
@@ -106,15 +77,9 @@ class AEROHelpersTestsView: XCTestCase {
     private func hideLoadingTesting<T: UIView>(_ view: T) {
         view.showLoading()
         view.hideLoading()
-        var fogViewFound = false
         
-        view.subviews.forEach({
-            if $0.tag != 0 {
-                fogViewFound = false
-            }
-        })
-        
-        XCTAssertFalse(fogViewFound)
+        let indicatorView = view.subviews.first(where: { ($0 as? ReuseIdentifiable)?.reuseIdentifier == "LoadingView" })
+        XCTAssertNil(indicatorView)
     }
     
     // MARK: indicator on view
@@ -128,6 +93,25 @@ class AEROHelpersTestsView: XCTestCase {
     
     func testLoadingIndicatorViewHide() {
         hideLoadingTesting(viewForLoadingIndicator)
+    }
+    
+    func testLOadIndicatorAppearance() {
+        let fogColor: UIColor = .black
+        let indicatorStyle: UIActivityIndicatorView.Style = .whiteLarge
+        let indicatorColor: UIColor = .red
+        
+        LoadingIndicator.appearance().fogColor = fogColor
+        LoadingIndicator.appearance().indicatorStyle = indicatorStyle
+        LoadingIndicator.appearance().indicatorColor = indicatorColor
+        
+        viewForLoadingIndicator.showLoading()
+        
+        let indicatorView = viewForLoadingIndicator.subviews.first(where: { ($0 as? ReuseIdentifiable)?.reuseIdentifier == "LoadingView" })
+        XCTAssertTrue(indicatorView?.backgroundColor == fogColor)
+        
+        let indicator = indicatorView?.subviews.first(where: { ($0 as? UIActivityIndicatorView) != nil }) as? UIActivityIndicatorView
+        XCTAssertTrue(indicator?.style == indicatorStyle)
+        XCTAssertTrue(indicator?.color == indicatorColor)
     }
     
     

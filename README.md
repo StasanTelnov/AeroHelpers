@@ -101,14 +101,18 @@ class SomeViewController: UIViewController {
 ```swift
 var isLoadingProgress: Bool
 
-func showLoading(fogging: Bool = true, indicatorStyle: UIActivityIndicatorView.Style? = .none)
+func showLoading(fogging: Bool = true, fogColor: UIColor? = .none, indicatorStyle: UIActivityIndicatorView.Style? = .none, indicatorColor: UIColor? = .none) 
 func hideLoading()
 ```
 Первый метод стартует индикатор загрузки, по всему `frame` `UIView`. Второй метод его убирает.
 Свойство `isLoadingProgress` возвращает `true`, если в настоящий момент индикатор активен.
+В случае если не передан `fogColor` - цвет затенения будет `lightGray` с `alpha` 0.4.
+`indicatorStyle` по умолчанию - `grey`.
 
-**TODO**
-- Добавить настройку цвета затенения, цвета самого индикатора и его размера через `Appearance`
+Через `Appearance`, являющийся классом `LoadingIndicator` можно настроить следующие параметры:
+- **fogColor** - цвет затенения.
+- **indicatorStyle** - тип индикатора загрузки.
+- **indicatorColor** - цвет индикатора загрузки.
 
 </details>
 
@@ -129,6 +133,13 @@ class ViewController: UIViewController {
         }
     }
 }
+```
+
+Пример настройки `Appearance`
+```swift
+LoadingIndicator.appearance().fogColor = .red
+LoadingIndicator.appearance().indicatorStyle = .whiteLarge
+LoadingIndicator.appearance().indicatorColor = .blue
 ```
 
 </details>
@@ -348,10 +359,7 @@ Start <br/>te&nbsp;&nbsp;st<br/><br/> <b>bold</b>
 
 #### Marked
 
-Выделяет часть подстроки, с помощью цвета и шрифта
-
-**TODO**
-- Добавить возможность задавать цвета и шрифты через `Appearance`
+Выделяет часть подстроки, с помощью цвета и шрифта.
 
 <details>
 <summary>Документация</summary>
@@ -375,6 +383,12 @@ Start <br/>te&nbsp;&nbsp;st<br/><br/> <b>bold</b>
 - **markColor**: цвет выделелнной подстроки, по умолчанию - голубой;
 - **isOnlyFirst**: если в значении `true`, то тогда буду выделены все вхождения подстроки, иначе только первое найденное. По-умолчанию - `false`.
 
+Через `Appearance` класс `MarkedSubstrings` можно задать следующие параметры:
+- **mainFont**.
+- **mainColor**.
+- **markFont**.
+- **markColor**.
+
 </details>
 
 <details>
@@ -396,6 +410,14 @@ print("\(markedString)")
 ```
 Результат: ![](ExamplesImages/String/marked/2.png)
 
+Пример настройки `Appearance`:
+```swift
+MarkedSubstrings.appearance().mainFont = .systemFont(ofSize: 20)
+MarkedSubstrings.appearance().mainColor = .grey
+MarkedSubstrings.appearance().markFont = .systemFont(ofSize: 18)
+MarkedSubstrings.appearance().markColor = .brown
+```
+
 </details>
 
 
@@ -407,8 +429,8 @@ print("\(markedString)")
 
 Такие типы как String, Int, Float, Double расширены для соответствия протоколу `CurrencyFormatted` и реализуют этот метод 
 ```swift
-    func currency(font: UIFont,
-                  color: UIColor,
+    func currency(mainFont: UIFont,
+                  mainColor: UIColor,
                   locale: Locale,
                   symbol: String,
                   prefix: String?,
@@ -416,10 +438,11 @@ print("\(markedString)")
                   count: Int?,
                   countFont: UIFont?,
                   countColor: UIColor?,
+                  minFraction: Int,
                   maxFraction: Int,
                   isStriked: Bool) -> NSAttributedString?
 ```
-Обязателены только font и color параметры, остальные опциональны и имеют значения по умолчанию. В случае если не удалось распарсить строку как цену, возвращает nil.
+Все поля не обязательны и имеют значение по умолчанию. В случае если не удалось распарсить строку как цену, возвращает nil.
 Так же протокол `CurrencyFormatted` имеет статичный метод:
 ```swift
     public static func currencySymbol(for localeIdentifier: String = "ru_RU") -> String
@@ -430,8 +453,8 @@ print("\(markedString)")
 Точно, в данном случае, служит разделителем целой и дробной частей. Если точек больше 1-ой, то метод вернёт nil.
 
 Входные параметры:
-- **font**: шрифт строки с ценой.
-- **color**: цвет строки с ценой.
+- **mainFont**: шрифт строки с ценой. По умолчанию системный шрифт системного размера.
+- **mainColor**: цвет строки с ценой. По умолчанию `darkText` цвет.
 - **locale**: локаль, в соответствии с правилами которой будет форматироваться цена. По умолчанию - текущая локаль устройства.
 - **symbol**: сивол валюты, который будет использован. По умолчанию - результат выполнения статичной функции `currencySymbol`, возвращающей символ для `ru_RU` локали (российский рубль).
 - **prefix**: префикс, который будет стоять перед ценой. По умолчанию nil.
@@ -439,11 +462,21 @@ print("\(markedString)")
 - **count**: количество товаров. По умолчанию nil. Если значение будет больше 1, то перед ценой появится это значение + ' x '. Например для значения 3 и цены 100, будет '3 x 100 ₽'
 - **countFont**: шрифт количества товаров. По умолчанию nil и соответствует параметру `font`.
 - **countColor**: цвет количества товаров. По умолчанию nil и соответствует параметру `color`.
-- **maxFraction**: количество знаков после запятой. По умолчанию значие 0.
+- **maxFraction**: минимальное количество знаков после запятой. По умолчанию значие 0.
+- **maxFraction**: максимальное количество знаков после запятой. По умолчанию значие 0.
 - **isStriked**: если `true`, то значение цены будет зачёркнуто. По умолчанию `false`.
 
-**TODO**
-- Добавить возможность задавать шрифты, цвета, символ валюты и локаль через `Appearance`
+Через `Appearance` можно настроить следующие параметры, используя класс `CurrencyFormat`:
+- **mainFont**
+- **mainColor**
+- **locale**
+- **symbol**
+- **prefix**
+- **postfix**
+- **countFont**
+- **countColor**
+- **maxFraction**
+- **maxFraction**
 
 </details>
 
@@ -476,6 +509,14 @@ let symbol = String.currencySymbol(for: "fr_FR")
 
 ```
 Результат: ![](ExamplesImages/String/currency/1.png)
+
+Пример задания свойств через `Appearance`:
+```swift
+CurrencyFormat.appearance().mainFont = .systemFont(ofSize: 20)
+CurrencyFormat.appearance().mainColor = .grey
+CurrencyFormat.appearance().symbol = .currencySymbol(for: "us_US")
+CurrencyFormat.appearance().countColor = .red
+```
 
 </details>
 

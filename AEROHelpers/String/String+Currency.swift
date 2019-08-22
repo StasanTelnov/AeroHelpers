@@ -10,13 +10,61 @@ import UIKit
 
 //swiftlint:disable function_parameter_count
 
+/// Appearance format for currency
+public class CurrencyFormat: UILabel {
+    
+    /// Font of cost string. Default is system font with system size.
+    @objc public dynamic var mainFont: UIFont?
+    
+    /// Color of cost string. Default is dark text color.
+    @objc public dynamic var mainColor: UIColor?
+    
+    /// Locale by rules of which cost string will formatted. Default is current locale.
+    @objc public dynamic var locale: Locale?
+    
+    /// Currency symbol. Gets from currencySymbol method of CurrencyFormatted protocol. Default return symbol for ru_RU locale (russian ruble).
+    @objc public dynamic var symbol: String?
+    
+    /// String, which comes before cost. Default is nil.
+    @objc public dynamic var prefix: String?
+    
+    /// String, which comes after cost. Default is nil.
+    @objc public dynamic var postfix: String?
+    
+    /// ont of count substring. Default is nil and equal to mainFont.
+    @objc public dynamic var countFont: UIFont?
+    
+    /// Color of count substring. Default is nil and equal to mainColor.
+    @objc public dynamic var countColor: UIColor?
+    
+    /// Minimum of digits in fraction. Default is zero.
+    @objc public dynamic var minFraction: Int = 0
+    
+    /// Maximum of digits in fraction. Default is zero.
+    @objc public dynamic var maxFraction: Int = 0
+    
+}
+
 // MARK: - protocol
 /// Protocol for string and numbers, which shold support formating as currency
 public protocol CurrencyFormatted {
     
     /// Should return formatted attributted string
-    func currency(font: UIFont,
-                  color: UIColor,
+    /// - Parameters:
+    ///   - mainFont: Font by default currency string. Default is system font with system size.
+    ///   - mainColor: Color by default currency string. Defailt is dark text.
+    ///   - locale: Locale by rules of which cost string will formatted. Default is current locale.
+    ///   - symbol: Currency symbol. Gets from currencySymbol method of CurrencyFormatted protocol. Default return symbol for ru_RU locale (russian ruble).
+    ///   - prefix: String, which comes before cost. Default is nil.
+    ///   - postfix: String, which comes after cost. Default is nil.
+    ///   - count: Number of items count. Default is nil. If more that 1, that befor cost inserted substring "\(count) X ...".
+    ///   - countFont: Font of count substring. Default is nil and equal to mainFont.
+    ///   - countColor: Color of count substring. Default is nil and equal to mainColor.
+    ///   - minFraction: Minimum of digits in fraction. Default is zero.
+    ///   - maxFraction: Maximum of digits in fraction. Default is zero.
+    ///   - isStriked: If true, that cost string will striked. Defaults is false.
+    func currency(mainFont: UIFont,
+                  mainColor: UIColor,
                   locale: Locale,
                   symbol: String,
                   prefix: String?,
@@ -24,6 +72,7 @@ public protocol CurrencyFormatted {
                   count: Int?,
                   countFont: UIFont?,
                   countColor: UIColor?,
+                  minFraction: Int,
                   maxFraction: Int,
                   isStriked: Bool) -> NSAttributedString?
 }
@@ -38,21 +87,21 @@ extension CurrencyFormatted {
 // MARK: - numbers helpers
 //TODO: bad solution. Should refactor on generics maybe
 extension Int: CurrencyFormatted {
-    
-    public func currency(font: UIFont,
-                         color: UIColor,
-                         locale: Locale = Locale.current,
-                         symbol: String = .currencySymbol(),
-                         prefix: String? = .none,
-                         postfix: String? = .none,
+    public func currency(mainFont: UIFont = CurrencyFormat.appearance().mainFont ?? .systemFont(ofSize: UIFont.systemFontSize),
+                         mainColor: UIColor = CurrencyFormat.appearance().mainColor ?? .darkText,
+                         locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                         symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                         prefix: String? = CurrencyFormat.appearance().prefix,
+                         postfix: String? = CurrencyFormat.appearance().postfix,
                          count: Int? = .none,
-                         countFont: UIFont? = .none,
-                         countColor: UIColor? = .none,
-                         maxFraction: Int = 0,
+                         countFont: UIFont? = CurrencyFormat.appearance().countFont,
+                         countColor: UIColor? = CurrencyFormat.appearance().countColor,
+                         minFraction: Int = CurrencyFormat.appearance().minFraction,
+                         maxFraction: Int = CurrencyFormat.appearance().maxFraction,
                          isStriked: Bool = false) -> NSAttributedString? {
         
-        return String(self).currency(font: font,
-                                     color: color,
+        return String(self).currency(mainFont: mainFont,
+                                     mainColor: mainColor,
                                      locale: locale,
                                      symbol: symbol,
                                      prefix: prefix,
@@ -60,26 +109,28 @@ extension Int: CurrencyFormatted {
                                      count: count,
                                      countFont: countFont,
                                      countColor: countColor,
+                                     minFraction: minFraction,
                                      maxFraction: maxFraction,
                                      isStriked: isStriked)
     }
 }
 
 extension Float: CurrencyFormatted {
-    public func currency(font: UIFont,
-                         color: UIColor,
-                         locale: Locale = Locale.current,
-                         symbol: String = .currencySymbol(),
-                         prefix: String? = .none,
-                         postfix: String? = .none,
+    public func currency(mainFont: UIFont = CurrencyFormat.appearance().mainFont ?? .systemFont(ofSize: UIFont.systemFontSize),
+                         mainColor: UIColor = CurrencyFormat.appearance().mainColor ?? .darkText,
+                         locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                         symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                         prefix: String? = CurrencyFormat.appearance().prefix,
+                         postfix: String? = CurrencyFormat.appearance().postfix,
                          count: Int? = .none,
-                         countFont: UIFont? = .none,
-                         countColor: UIColor? = .none,
-                         maxFraction: Int = 0,
+                         countFont: UIFont? = CurrencyFormat.appearance().countFont,
+                         countColor: UIColor? = CurrencyFormat.appearance().countColor,
+                         minFraction: Int = CurrencyFormat.appearance().minFraction,
+                         maxFraction: Int = CurrencyFormat.appearance().maxFraction,
                          isStriked: Bool = false) -> NSAttributedString? {
         
-        return String(self).currency(font: font,
-                                     color: color,
+        return String(self).currency(mainFont: mainFont,
+                                     mainColor: mainColor,
                                      locale: locale,
                                      symbol: symbol,
                                      prefix: prefix,
@@ -87,26 +138,28 @@ extension Float: CurrencyFormatted {
                                      count: count,
                                      countFont: countFont,
                                      countColor: countColor,
+                                     minFraction: minFraction,
                                      maxFraction: maxFraction,
                                      isStriked: isStriked)
     }
 }
 
 extension Double: CurrencyFormatted {
-    public func currency(font: UIFont,
-                         color: UIColor,
-                         locale: Locale = Locale.current,
-                         symbol: String = .currencySymbol(),
-                         prefix: String? = .none,
-                         postfix: String? = .none,
+    public func currency(mainFont: UIFont = CurrencyFormat.appearance().mainFont ?? .systemFont(ofSize: UIFont.systemFontSize),
+                         mainColor: UIColor = CurrencyFormat.appearance().mainColor ?? .darkText,
+                         locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                         symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                         prefix: String? = CurrencyFormat.appearance().prefix,
+                         postfix: String? = CurrencyFormat.appearance().postfix,
                          count: Int? = .none,
-                         countFont: UIFont? = .none,
-                         countColor: UIColor? = .none,
-                         maxFraction: Int = 0,
+                         countFont: UIFont? = CurrencyFormat.appearance().countFont,
+                         countColor: UIColor? = CurrencyFormat.appearance().countColor,
+                         minFraction: Int = CurrencyFormat.appearance().minFraction,
+                         maxFraction: Int = CurrencyFormat.appearance().maxFraction,
                          isStriked: Bool = false) -> NSAttributedString? {
         
-        return String(self).currency(font: font,
-                                     color: color,
+        return String(self).currency(mainFont: mainFont,
+                                     mainColor: mainColor,
                                      locale: locale,
                                      symbol: symbol,
                                      prefix: prefix,
@@ -114,6 +167,7 @@ extension Double: CurrencyFormatted {
                                      count: count,
                                      countFont: countFont,
                                      countColor: countColor,
+                                     minFraction: minFraction,
                                      maxFraction: maxFraction,
                                      isStriked: isStriked)
     }
@@ -129,24 +183,26 @@ extension String: CurrencyFormatted {
     
     
     /// Return formatted as cost attributed string from string
-    public func currency(font: UIFont,
-                         color: UIColor,
-                         locale: Locale = Locale.current,
-                         symbol: String = .currencySymbol(),
-                         prefix: String? = .none,
-                         postfix: String? = .none,
+    public func currency(mainFont: UIFont = CurrencyFormat.appearance().mainFont ?? .systemFont(ofSize: UIFont.systemFontSize),
+                         mainColor: UIColor = CurrencyFormat.appearance().mainColor ?? .darkText,
+                         locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                         symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                         prefix: String? = CurrencyFormat.appearance().prefix,
+                         postfix: String? = CurrencyFormat.appearance().postfix,
                          count: Int? = .none,
-                         countFont: UIFont? = .none,
-                         countColor: UIColor? = .none,
-                         maxFraction: Int = 0,
-                         isStriked: Bool = false) -> (NSAttributedString?) {
+                         countFont: UIFont? = CurrencyFormat.appearance().countFont,
+                         countColor: UIColor? = CurrencyFormat.appearance().countColor,
+                         minFraction: Int = CurrencyFormat.appearance().minFraction,
+                         maxFraction: Int = CurrencyFormat.appearance().maxFraction,
+                         isStriked: Bool = false) -> NSAttributedString? {
         
-        guard let string = formattedCurrency(font: font,
-                                             color: color,
+        guard let string = formattedCurrency(font: mainFont,
+                                             color: mainColor,
                                              locale: locale,
                                              symbol: symbol,
                                              prefix: prefix,
                                              postfix: postfix,
+                                             minFraction: minFraction,
                                              maxFraction: maxFraction,
                                              isStriked: isStriked) else {
                                                 return .none
@@ -157,7 +213,7 @@ extension String: CurrencyFormatted {
                 return string.copy() as? NSAttributedString
         }
         
-        let countFactorPrefix = countFactor(count, font: countFont ?? font, color: countColor ?? color)
+        let countFactorPrefix = countFactor(count, font: countFont ?? mainFont, color: countColor ?? mainColor)
         string.insert(countFactorPrefix, at: 0)
         
         return string.copy() as? NSAttributedString
@@ -170,6 +226,7 @@ extension String: CurrencyFormatted {
                                    symbol: String = .currencySymbol(),
                                    prefix: String? = .none,
                                    postfix: String? = .none,
+                                   minFraction: Int = 0,
                                    maxFraction: Int = 0,
                                    isStriked: Bool = false) -> NSMutableAttributedString? {
         
@@ -188,7 +245,7 @@ extension String: CurrencyFormatted {
         
         let price = NSNumber(value: intConst)
         
-        let formatter = currencyFormatter(locale: locale, symbol: symbol, maxFraction: maxFraction)
+        let formatter = currencyFormatter(locale: locale, symbol: symbol, minFraction: minFraction, maxFraction: maxFraction)
         
         var currencyString = formatter.string(from: price) ?? "-"
         
@@ -213,11 +270,12 @@ extension String: CurrencyFormatted {
         return attributedString
     }
     
-    private func currencyFormatter(locale: Locale, symbol: String, maxFraction: Int) -> NumberFormatter {
+    private func currencyFormatter(locale: Locale, symbol: String, minFraction: Int, maxFraction: Int) -> NumberFormatter {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.numberStyle = .currency
         formatter.currencySymbol = symbol
+        formatter.minimumFractionDigits = maxFraction
         formatter.maximumFractionDigits = maxFraction
         
         return formatter
