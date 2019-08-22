@@ -257,7 +257,7 @@ print("Спустя \(13) \(10.declension(variants))") // Спустя 13 лет
 ### String
 #### Html
 
-Coming soon...
+Преобразует строку с html тегами и html entities в максимально соответствующую ей `NSAtributtedString`. 
 <details>
 <summary>Документация</summary>
 
