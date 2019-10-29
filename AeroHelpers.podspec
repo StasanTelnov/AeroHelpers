@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '10.0'
     s.name = 'AeroHelpers'
     s.summary = 'Набор расширений и мини-утилит, часто используемых в проектах Aero.'
-    s.version = '1.0.1'
+    s.version = '1.0.2'
   	s.license = { :type => 'MIT', :file => 'LICENSE' }
     s.authors = { 'Stas Telnov' => 'telnov@aeroidea.ru' }
     s.homepage = 'https://github.com/AeroAgency/AeroHelpers'
@@ -11,8 +11,11 @@ Pod::Spec.new do |s|
   	s.cocoapods_version = '>= 1.7.0'  
     
     s.source = { :git => "https://github.com/AeroAgency/AeroHelpers.git", :tag => s.version }
-    s.default_subspec = "UIViewController", "UIView", "Int", "String"
+    s.default_subspec = "Collections", "UIViewController", "UIView", "Int", "String"
 
+    s.subspec "Collections" do |ss|
+        ss.source_files  = "AEROHelpers/Collections/"
+    end
     
     s.subspec "UIViewController" do |ss|
     	ss.source_files  = "AEROHelpers/UIViewController/"

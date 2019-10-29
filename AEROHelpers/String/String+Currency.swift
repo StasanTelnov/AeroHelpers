@@ -75,6 +75,13 @@ public protocol CurrencyFormatted {
                   minFraction: Int,
                   maxFraction: Int,
                   isStriked: Bool) -> NSAttributedString?
+    
+    func currencyString(locale: Locale,
+                        symbol: String,
+                        prefix: String?,
+                        postfix: String?,
+                        minFraction: Int,
+                        maxFraction: Int) -> String
 }
 
 extension CurrencyFormatted {
@@ -113,6 +120,21 @@ extension Int: CurrencyFormatted {
                                      maxFraction: maxFraction,
                                      isStriked: isStriked)
     }
+    
+    public func currencyString(locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                               symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                               prefix: String? = CurrencyFormat.appearance().prefix,
+                               postfix: String? = CurrencyFormat.appearance().postfix,
+                               minFraction: Int = CurrencyFormat.appearance().minFraction,
+                               maxFraction: Int = CurrencyFormat.appearance().maxFraction) -> String {
+        
+        return String(self).currencyString(locale: locale,
+                                           symbol: symbol,
+                                           prefix: prefix,
+                                           postfix: postfix,
+                                           minFraction: minFraction,
+                                           maxFraction: maxFraction)
+    }
 }
 
 extension Float: CurrencyFormatted {
@@ -141,6 +163,21 @@ extension Float: CurrencyFormatted {
                                      minFraction: minFraction,
                                      maxFraction: maxFraction,
                                      isStriked: isStriked)
+    }
+    
+    public func currencyString(locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                               symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                               prefix: String? = CurrencyFormat.appearance().prefix,
+                               postfix: String? = CurrencyFormat.appearance().postfix,
+                               minFraction: Int = CurrencyFormat.appearance().minFraction,
+                               maxFraction: Int = CurrencyFormat.appearance().maxFraction) -> String {
+        
+        return String(self).currencyString(locale: locale,
+                                           symbol: symbol,
+                                           prefix: prefix,
+                                           postfix: postfix,
+                                           minFraction: minFraction,
+                                           maxFraction: maxFraction)
     }
 }
 
@@ -171,6 +208,21 @@ extension Double: CurrencyFormatted {
                                      maxFraction: maxFraction,
                                      isStriked: isStriked)
     }
+    
+    public func currencyString(locale: Locale = CurrencyFormat.appearance().locale ?? Locale.current,
+                               symbol: String = CurrencyFormat.appearance().symbol ?? .currencySymbol(),
+                               prefix: String? = CurrencyFormat.appearance().prefix,
+                               postfix: String? = CurrencyFormat.appearance().postfix,
+                               minFraction: Int = CurrencyFormat.appearance().minFraction,
+                               maxFraction: Int = CurrencyFormat.appearance().maxFraction) -> String {
+        
+        return String(self).currencyString(locale: locale,
+                                           symbol: symbol,
+                                           prefix: prefix,
+                                           postfix: postfix,
+                                           minFraction: minFraction,
+                                           maxFraction: maxFraction)
+    }
 }
 
 
@@ -180,7 +232,6 @@ extension Double: CurrencyFormatted {
 extension String: CurrencyFormatted {
     
     // MARK: - public methods
-    
     
     /// Return formatted as cost attributed string from string
     public func currency(mainFont: UIFont = CurrencyFormat.appearance().mainFont ?? .systemFont(ofSize: UIFont.systemFontSize),
@@ -219,6 +270,20 @@ extension String: CurrencyFormatted {
         return string.copy() as? NSAttributedString
     }
     
+    public func currencyString(locale: Locale = Locale.current,
+                        symbol: String = .currencySymbol(),
+                        prefix: String? = .none,
+                        postfix: String? = .none,
+                        minFraction: Int = 0,
+                        maxFraction: Int = 0) -> String {
+        
+        guard let price = cleanToNumber() else {
+            return self
+        }
+        let formatter = currencyFormatter(locale: locale, symbol: symbol, minFraction: minFraction, maxFraction: maxFraction)
+        return formatter.string(from: price) ?? self
+    }
+    
     // MARK: - internal methods
     private func formattedCurrency(font: UIFont,
                                    color: UIColor,
@@ -229,21 +294,10 @@ extension String: CurrencyFormatted {
                                    minFraction: Int = 0,
                                    maxFraction: Int = 0,
                                    isStriked: Bool = false) -> NSMutableAttributedString? {
-        
-        var digitsString = replacingOccurrences(of: ",", with: ".", options: .literal)
-        
-        guard digitsString.firstIndex(of: ".") == digitsString.lastIndex(of: ".") else {
-            print("Dont can parse string to number: many dots.")
+
+        guard let price = cleanToNumber() else {
             return .none
         }
-        
-        digitsString = replacingOccurrences(of: "[^.0-9-]", with: "", options: .regularExpression)
-        
-        guard let intConst = Float(digitsString) else {
-            return .none
-        }
-        
-        let price = NSNumber(value: intConst)
         
         let formatter = currencyFormatter(locale: locale, symbol: symbol, minFraction: minFraction, maxFraction: maxFraction)
         
@@ -292,6 +346,22 @@ extension String: CurrencyFormatted {
         attributedCountFactorString.addAttributes(attibutes, range: range)
         
         return attributedCountFactorString
+    }
+    
+    private func cleanToNumber() -> NSNumber? {
+        var digitsString = replacingOccurrences(of: ",", with: ".", options: .literal)
+        
+        guard digitsString.firstIndex(of: ".") == digitsString.lastIndex(of: ".") else {
+            print("Dont can parse string to number: many dots.")
+            return .none
+        }
+        
+        digitsString = replacingOccurrences(of: "[^.0-9-]", with: "", options: .regularExpression)
+        
+        guard let intConst = Float(digitsString) else {
+            return .none
+        }
+        return NSNumber(value: intConst)
     }
 }
 

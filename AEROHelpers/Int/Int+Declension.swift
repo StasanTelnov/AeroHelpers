@@ -97,6 +97,18 @@ public extension Int {
             let variants = DeclensionsVariants("элемент", "элемента", "элементов")
             return currentNumber.declension(variants)
         }
+        
+        /// Predefined  persons  variants
+        public var persons: String {
+            let variants = DeclensionsVariants("персона", "персоны", "персон")
+            return currentNumber.declension(variants)
+        }
+        
+        /// Predefined  reception  variants
+        public var reception: String {
+            let variants = DeclensionsVariants("приём", "приёма", "приёмов")
+            return currentNumber.declension(variants)
+        }
     }
     
     /// Return predefined variants
