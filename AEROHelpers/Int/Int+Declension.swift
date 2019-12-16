@@ -68,6 +68,12 @@ public extension Int {
             return currentNumber.declension(variants)
         }
         
+        /// Predefined minutes variants
+        public var minutes: String {
+            let variants = DeclensionsVariants("минуту", "минуты", "минут")
+            return currentNumber.declension(variants)
+        }
+        
         /// Predefined seconds variants
         public var seconds: String {
             let variants = DeclensionsVariants("секунду", "секунды", "секунд")
@@ -92,6 +98,12 @@ public extension Int {
             return currentNumber.declension(variants)
         }
         
+        /// Predefined productsGoods variants
+        public var dishes: String {
+            let variants = DeclensionsVariants("блюдо", "блюда", "блюд")
+            return currentNumber.declension(variants)
+        }
+        
         /// Predefined items variants
         public var items: String {
             let variants = DeclensionsVariants("элемент", "элемента", "элементов")
@@ -107,6 +119,30 @@ public extension Int {
         /// Predefined  reception  variants
         public var reception: String {
             let variants = DeclensionsVariants("приём", "приёма", "приёмов")
+            return currentNumber.declension(variants)
+        }
+        
+        /// Supper  reception  variants
+        public var supper: String {
+            let variants = DeclensionsVariants("ужин", "ужина", "ужинов")
+            return currentNumber.declension(variants)
+        }
+        
+        /// Dinner  reception  variants
+        public var dinner: String {
+            let variants = DeclensionsVariants("обед", "обеда", "обедов")
+            return currentNumber.declension(variants)
+        }
+        
+        /// Breakfast  reception  variants
+        public var breakfast: String {
+            let variants = DeclensionsVariants("завтрак", "завтрака", "завтраков")
+            return currentNumber.declension(variants)
+        }
+        
+        /// Breakfast and  supper  reception  variants
+        public var supperBreakfast: String {
+            let variants = DeclensionsVariants("ужин и завтрак", "ужина и завтрака", "ужинов и завтраков")
             return currentNumber.declension(variants)
         }
     }

@@ -281,7 +281,17 @@ extension String: CurrencyFormatted {
             return self
         }
         let formatter = currencyFormatter(locale: locale, symbol: symbol, minFraction: minFraction, maxFraction: maxFraction)
-        return formatter.string(from: price) ?? self
+        
+        var currencyString = formatter.string(from: price) ?? self
+        
+        if let existPrefix = prefix {
+            currencyString = existPrefix + currencyString
+        }
+        if let existPostfix = postfix {
+            currencyString += existPostfix
+        }
+        
+        return currencyString
     }
     
     // MARK: - internal methods
